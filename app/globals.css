@@ -3,22 +3,71 @@
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-app-background: rgb(250, 250, 252);
+  --color-primary: #4246d9;
+  --color-secondary: #F1F1FB;
+
 }
+
+
+@layer components {
+  .container {
+    @apply self-center px-4 md:px-14 mx-auto;
+  }
+}
+
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
-body {
+/* body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */
+
+
+/* .app-container {
+  align-self: center;
+  width: 100%;
+  padding-inline: 1rem;
+  margin-inline: auto;
+
+  /* 640px 
+  @media (width >=40rem) {
+    max-width: 40rem;
+  }
+
+  /* 768px 
+  @media (width >=48rem) {
+    padding-inline: 3.5rem;
+    max-width: 48rem;
+  }
+
+  /* 1024px 
+  @media (width >=64rem) 
+  {
+    max-width: 64rem;
+  }
+
+  /* 1280px 
+  @media (width >=80rem) {
+    max-width: 64rem;
+  }
+
+    /* 1536px 
+  @media (width >=96rem) {
+    padding-inline: 3rem;
+    margin-inline: auto;
+    max-width: 96rem;
+  }
+} */

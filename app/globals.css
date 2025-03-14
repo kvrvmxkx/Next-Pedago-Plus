@@ -11,7 +11,7 @@
 
 
 @layer components {
-  .container {
+  .app-container {
     @apply self-center px-4 md:px-14 mx-auto;
   }
 }
@@ -36,38 +36,38 @@
 } */
 
 
-/* .app-container {
+.app-container {
   align-self: center;
   width: 100%;
   padding-inline: 1rem;
   margin-inline: auto;
 
-  /* 640px 
+  /* 640px */ 
   @media (width >=40rem) {
     max-width: 40rem;
   }
 
-  /* 768px 
+  /* 768px */
   @media (width >=48rem) {
     padding-inline: 3.5rem;
     max-width: 48rem;
   }
 
-  /* 1024px 
+  /* 1024px */
   @media (width >=64rem) 
   {
     max-width: 64rem;
   }
 
-  /* 1280px 
+  /* 1280px */
   @media (width >=80rem) {
-    max-width: 64rem;
+    max-width: 80rem;
   }
 
-    /* 1536px 
-  @media (width >=96rem) {
+    /* 1536px */
+  /*@media (width >=96rem) {
     padding-inline: 3rem;
     margin-inline: auto;
     max-width: 96rem;
-  }
-} */
+  } */
+} 

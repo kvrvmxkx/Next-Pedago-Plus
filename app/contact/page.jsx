@@ -2,9 +2,9 @@ import React from 'react'
 
 const Contact = () => {
     return (
-        <div className='container' id='top'>
+        <div className='app-container' id='top'>
             <div className='mb-32'>
-                <p className="capitalize font-bold text-4xl md:text-[2.4rem] lg:text-[3.3rem] xl:text-[4.3rem] leading-[1.175] my-16 md:my-28 lg:my-36">
+                <p className="capitalize font-bold text-4xl md:text-[2.4rem] lg:text-[3.3rem] xl:text-[4.1rem] leading-[1.175] my-16 md:my-28 lg:my-36">
                     Let's build <span className="text-primary">greatest</span> <br />
                     futur together.
                 </p>
@@ -15,7 +15,7 @@ const Contact = () => {
                         <p>875, avenue Homère, Sherbrooke, Québec, J1N 2H8</p>
                     </div>
                     <div className='flex flex-col max-w-4xl'>
-                        <p className='text-2xl md:text-3xl lg:text-5xl'>
+                        <p className='text-2xl md:text-3xl lg:text-4xl'>
                             You learn today and earn tomorrow.
                             The roots of education are bitter but the fruits are sweet.
                             If you learn today you can lead tomorrow.

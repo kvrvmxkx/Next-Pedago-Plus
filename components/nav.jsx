@@ -25,7 +25,7 @@ const Nav = () => {
               <a href="/" className="" aria-current="page">Home</a>
             </li>
             <li>
-              <a href="#" className="">Course</a>
+              <a href="courses" className="">Courses</a>
             </li>
             <li>
               <a href="/#pricing" className="">Pricing</a>
@@ -64,7 +64,7 @@ const Nav = () => {
           <p className='text-xs'>Home</p>
         </a>
 
-        <a href='/' className="bg-white flex flex-col gap-1 items-center justify-center text-gray-900">
+        <a href='/courses' className="bg-white flex flex-col gap-1 items-center justify-center text-gray-900">
           <LayoutGrid />
           <p className='text-xs'>Courses</p>
         </a>

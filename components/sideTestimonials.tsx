@@ -1,3 +1,5 @@
+"use client"
+
 import { ArrowLeft, ArrowRight, Quote } from 'lucide-react'
 import React, { useState } from 'react'
 
@@ -33,12 +35,12 @@ const SideTestimonials = () => {
 
     const [index, setIndex] = useState(1)
     const increment = () => {
-        let i = index == testimonials.length - 1 ? 0 : index + 1;
+        const i = index == testimonials.length - 1 ? 0 : index + 1;
         setIndex(i);
     }
 
     const decrement = () => {
-        let i = index == 0 ? testimonials.length - 1 : index - 1;
+        const i = index == 0 ? testimonials.length - 1 : index - 1;
         setIndex(i);
     }
 
@@ -48,7 +50,7 @@ const SideTestimonials = () => {
                     before:bg-primary before:content-[' '] before:rounded-tr-2xl before:w-8 before:h-8 before:absolute before:-bottom-8 before:right-0 before:shadow-app-background before:shadow-[13px_0_0]"> </div>
 
             <div className='flex flex-col gap-8'>
-                <p className='xl:text-5xl 2xl:text-6xl'>What's our students saids.</p>
+                <p className='xl:text-5xl 2xl:text-6xl'>What&apos;s our students saids.</p>
 
                 <Quote size={25} />
 

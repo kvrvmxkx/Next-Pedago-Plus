@@ -5,13 +5,13 @@ const Contact = () => {
         <div className='app-container' id='top'>
             <div className='mb-32'>
                 <p className="capitalize font-bold text-4xl md:text-[2.4rem] lg:text-[3.3rem] xl:text-[4.1rem] leading-[1.175] my-16 md:my-28 lg:my-36">
-                    Let's build <span className="text-primary">greatest</span> <br />
+                    Let&apos;s build <span className="text-primary">greatest</span> <br />
                     futur together.
                 </p>
                 <div className='flex flex-col-reverse md:flex-row gap-10 md:gap-4 lg:gap-56'>
                     <div className='text-gray-600 text-lg flex flex-col gap-2 min-w-1/3'>
                         <a href="mailto:hello@pedagoplus.com">hello@pedagoplus.com</a>
-                        <p href="tel:hello@pedagoplus.com">(514) 456 7890</p>
+                        <a href="tel:hello@pedagoplus.com">(514) 456 7890</a>
                         <p>875, avenue Homère, Sherbrooke, Québec, J1N 2H8</p>
                     </div>
                     <div className='flex flex-col max-w-4xl'>

@@ -38,7 +38,6 @@ const news = [
     },
 ]
 
-
 const popular = [
     {
         title: "The Complete Web Design Course",
@@ -137,9 +136,6 @@ const Courses = () => {
                     {cat.map((e, k) => <div className='p-5 text-center rounded-md bg-indigo-50 text-sm hover:bg-indigo-100' key={k}>{e}</div>)}
                 </div>
             </div>
-
-
-
         </div>
     )
 }

@@ -42,7 +42,7 @@
   padding-inline: 1rem;
   margin-inline: auto;
 
-  /* 640px */ 
+  /* 640px */
   @media (width >=40rem) {
     max-width: 40rem;
   }
@@ -54,8 +54,7 @@
   }
 
   /* 1024px */
-  @media (width >=64rem) 
-  {
+  @media (width >=64rem) {
     max-width: 64rem;
   }
 
@@ -64,10 +63,10 @@
     max-width: 80rem;
   }
 
-    /* 1536px */
+  /* 1536px */
   /*@media (width >=96rem) {
     padding-inline: 3rem;
     margin-inline: auto;
     max-width: 96rem;
   } */
-} 
+}

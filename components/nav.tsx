@@ -1,4 +1,5 @@
 import { Home, LayoutGrid, LogIn, Phone } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 const Nav = () => {
@@ -12,23 +13,23 @@ const Nav = () => {
       }
       <div className='hidden md:flex justify-between py-2 my-3 app-container'>
         <div>
-          <a href='/' className='text-2xl font-extrabold'>
+          <Link href='/' className='text-2xl font-extrabold'>
             <span className='text-primary'>Pedago</span>
             <span className=''>+</span>
-          </a>
+          </Link>
         </div>
 
         <div className='my-auto'>
           <ul className="flex gap-2 lg:gap-8">
             <li>
               {/* <Link className={({ isActive }) => (isActive ? " text-primary" : "hover:text-primary")} to='/'>Home</Link> */}
-              <a href="/" className="" aria-current="page">Home</a>
+              <Link href="/" className="" aria-current="page">Home</Link>
             </li>
             <li>
               <a href="courses" className="">Courses</a>
             </li>
             <li>
-              <a href="/#pricing" className="">Pricing</a>
+              <Link href="/#pricing" className="">Pricing</Link>
             </li>
             <li>
               <a href="/about-us" className="">About</a>
@@ -59,17 +60,17 @@ const Nav = () => {
       }
 
       <div className='flex md:hidden z-10 justify-between fixed w-full bottom-0 left-0 right-0 p-5 shadow-[0_0_0_1px_rgba(0,0,0,0.1)] bg-white'>
-        <a href='/' className="bg-white flex flex-col gap-1 items-center justify-center text-gray-900">
+        <Link href='/' className="bg-white flex flex-col gap-1 items-center justify-center text-gray-900">
           <Home />
           <p className='text-xs'>Home</p>
-        </a>
+        </Link>
 
         <a href='/courses' className="bg-white flex flex-col gap-1 items-center justify-center text-gray-900">
           <LayoutGrid />
           <p className='text-xs'>Courses</p>
         </a>
 
-        <a to='/contact' className="bg-white flex flex-col gap-1 items-center justify-center text-gray-900">
+        <a href='/contact' className="bg-white flex flex-col gap-1 items-center justify-center text-gray-900">
           <Phone />
           <p className='text-xs'>Contact</p>
         </a>

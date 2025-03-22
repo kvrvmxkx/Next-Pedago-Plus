@@ -1,20 +1,42 @@
-import { NextAuthOptions } from "next-auth";
+import NextAuth from "next-auth"
 import {PrismaAdapter} from "@auth/prisma-adapter"
 import { prisma } from './prisma';
-import GithubProvider from 'next-auth/providers/github';
-import GoogleProvider from 'next-auth/providers/google';
+import Github from 'next-auth/providers/github';
+import Google from 'next-auth/providers/google';
+import Credentials from 'next-auth/providers/credentials';
 
+import { getUserByEmail } from "@/data/user";
 
-export const authConfig: NextAuthOptions = {
+export const { handlers, signIn, signOut, auth } = NextAuth({
+    session: {
+        strategy: 'jwt'
+    },
     adapter: PrismaAdapter(prisma),
     providers: [
-        GithubProvider({
-            clientId: process.env.AUTH_GITHUB_ID as string,
-            clientSecret: process.env.AUTH_GITHUB_SECRET as string
-        }),
-        GoogleProvider({
-            clientId: process.env.AUTH_GOOGLE_ID as string,
-            clientSecret: process.env.AUTH_GOOGLE_SECRET as string
+        Github, 
+        Google,
+        Credentials({
+            async authorize(credentials) {
+                if (credentials === null) return null;
+                try {
+                    const user = getUserByEmail(credentials?.email)
+                    if(user) {
+                        const isMatch = user?.password === credentials?.password;
+                        if(isMatch) {
+                            return user;
+                        }
+                        else {
+                            throw new Error('Password incorrect');
+                        }
+                    }
+                    else {
+                        throw new Error('User not found');
+                    }
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                } catch (error) {
+                    throw new Error('Server error');
+                }
+            }
         })
-    ]
-}
+    ],
+})

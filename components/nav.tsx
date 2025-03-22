@@ -1,10 +1,21 @@
 import { Home, LayoutGrid, LogIn, Phone } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+//import { SignOut } from './authButtons'
+import { auth } from '@/lib/auth'
+import { signOutAction } from '@/action'
 
-const Nav = () => {
+
+const Nav = async() => {
+  const session = await auth();
+
+  let initials:string[] = []
+  if (session?.user?.name && !session?.user?.image) {
+      initials = session.user.name.split(' ');
+  }
+
   return (
-
     <>
       {
         /**
@@ -40,17 +51,69 @@ const Nav = () => {
           </ul>
         </div>
 
+        {
+          session?.user 
+          ? 
+          <div className='group relative'>
 
-        <div className='my-auto'>
-          <ul className="flex gap-2">
-            <li>
-              <a href="/signin" className="">Sign In</a>
-            </li>
-            <li>
-              <a href="/register" className="bg-primary text-white px-5 py-3 mx-1 rounded-md ">Register</a>
-            </li>
-          </ul>
-        </div>
+            {
+              session?.user?.image ? 
+              <Image
+                className='rounded-full'
+                src={session.user.image}
+                width={40}
+                height={40}
+                alt="hero"
+              /> :
+              <div className='h-10 w-10 rounded-full bg-primary text-white flex items-center justify-center font-bold'>
+                <span>{initials[0]}</span>
+              </div>
+            }
+
+
+            <div id="dropdownHover" className="absolute group-hover:flex bg-white flex-col z-10 hidden right-0 rounded-lg shadow-sm w-48 transition ease-in-out duration-500">
+                <ul className="py-2 text-sm text-gray-700" aria-labelledby="dropdownHoverButton">
+                  <li>
+                    <a href="#" className="block px-4 py-2 hover:bg-gray-100">
+                      <p className='font-extrabold whitespace-nowrap overflow-hidden overflow-ellipsis resize-none w-40'>{session?.user?.name}</p>
+                      <p className='text-xs whitespace-nowrap overflow-hidden overflow-ellipsis resize-none w-40'>{session?.user?.email}</p>
+                    </a>
+                  </li>
+                  <hr className='my-2 border-gray-300' />
+                  <li>
+                    <a href="#" className="block px-4 py-2 hover:bg-gray-100">Settings</a>
+                  </li>
+                  <li>
+                    <a href="#" className="block px-4 py-2 hover:bg-gray-100">Earnings</a>
+                  </li>
+                  <hr className='my-2 border-gray-300'/>
+                  <li>
+                    <form action={signOutAction}>
+                      <button type="submit" className="px-4 py-2 hover:bg-gray-100 w-full text-start">
+                        SignOut
+                      </button>
+                    </form>
+                    {/* <SignOut /> */}
+                    {/* <a onClick={() => signOut()} className="block px-4 py-2 hover:bg-gray-100">Sign out</a> */}
+                  </li>
+                </ul>
+            </div>
+          </div>
+          : 
+            <div className='my-auto'>
+              <ul className="flex gap-2">
+                <li>
+                  <a href="/signin" className="cursor-pointer">Sign In</a>
+                </li>
+                <li>
+                  <a href="/register" className="bg-primary text-white px-5 py-3 mx-1 rounded-md cursor-pointer">Register</a>
+                </li>
+              </ul>
+            </div>
+        }
+
+
+
       </div>
 
       {
@@ -82,7 +145,6 @@ const Nav = () => {
           </div>
         </a>
       </div>
-
     </>
 
   )

@@ -65,7 +65,7 @@ const SideTestimonials = () => {
                     <button onClick={() => decrement()} className='p-4 border-[.5px] border-app-background rounded-md hover:text-black hover:bg-app-background cursor-pointer'>
                         <ArrowLeft />
                     </button>
-                    <button onClick={() => increment()} className='p-4 bg-app-background text-black rounded-md hover:border border-app-background hover:bg-primary hover:text-white cursor-pointer'>
+                    <button onClick={() => increment()} className='p-4 bg-app-background text-black rounded-md hover:border-[.5px] border-app-background hover:bg-primary hover:text-white cursor-pointer'>
                         <ArrowRight />
                     </button>
                 </div>

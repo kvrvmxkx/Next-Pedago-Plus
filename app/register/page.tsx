@@ -1,49 +1,49 @@
 'use client'
 
 import SideTestimonials from '@/components/sideTestimonials';
-import { FaGoogle, FaFacebook, FaGithub } from "react-icons/fa";
+// import { FaGoogle, FaFacebook, FaGithub } from "react-icons/fa";
 
-import { socialSignInAction } from '@/action';
-import { SyntheticEvent, useState } from 'react';
-import { useRouter } from 'next/navigation';
+// import { socialSignInAction } from '@/action';
+// import { SyntheticEvent, useState } from 'react';
+// import { useRouter } from 'next/navigation';
 
 const Register = () => {
-    const router = useRouter();
-    const [error, setError] = useState("");
-    async function handleFormSubmit(event: SyntheticEvent<HTMLFormElement, SubmitEvent>) {
-        event.preventDefault()
-        try {
-            const formData = new FormData(event.currentTarget);
+    // const router = useRouter();
+    // const [error, setError] = useState("");
+    // async function handleFormSubmit(event: SyntheticEvent<HTMLFormElement, SubmitEvent>) {
+    //     event.preventDefault()
+    //     try {
+    //         const formData = new FormData(event.currentTarget);
 
-            const firstname = formData.get('firstname');
-            const lastname = formData.get('lastname');
-            const email = formData.get('email');
-            const password = formData.get('password');
+    //         const firstname = formData.get('firstname');
+    //         const lastname = formData.get('lastname');
+    //         const email = formData.get('email');
+    //         const password = formData.get('password');
 
-            console.log(firstname);
+    //         console.log(firstname);
 
-            if(firstname && lastname && email && password) {
-                const response = await fetch(`api/register`, {
-                    method: "POST",
-                    headers: {
-                        "content-type":"application/json",
-                    },
-                    body: JSON.stringify({
-                        firstname,
-                        lastname,
-                        email,
-                        password
-                    })
-                });
+    //         if(firstname && lastname && email && password) {
+    //             const response = await fetch(`api/register`, {
+    //                 method: "POST",
+    //                 headers: {
+    //                     "content-type":"application/json",
+    //                 },
+    //                 body: JSON.stringify({
+    //                     firstname,
+    //                     lastname,
+    //                     email,
+    //                     password
+    //                 })
+    //             });
 
-                if (response.status === 201) router.push('/signin');
-            }
+    //             if (response.status === 201) router.push('/signin');
+    //         }
 
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (error) {
-            setError("Error while registration");
-        }
-    }
+    //     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    //     } catch (error) {
+    //         setError("Error while registration");
+    //     }
+    // }
 
 
     return (
@@ -56,10 +56,11 @@ const Register = () => {
                     </div>
 
 
-                    <form onSubmit={handleFormSubmit} className='flex flex-col'>
-                        <div className="mb-4 text-sm text-red-500">
+                    <form className='flex flex-col'>
+                        {/* <div className="mb-4 text-sm text-red-500">
                             {error}
-                        </div>
+                            onSubmit={handleFormSubmit}
+                        </div> */}
                         <div className='flex flex-col gap-7'>
                             <div className='flex flex-col md:flex-row gap-7 md:gap-2'>
                                 <div className='flex flex-col gap-1 w-full relative'>
@@ -86,7 +87,7 @@ const Register = () => {
                     </form>
 
 
-                    <form action={socialSignInAction} className='flex justify-center gap-1'>
+                    {/* <form action={socialSignInAction} className='flex justify-center gap-1'>
                         <button type="submit" name="action" value="google">
                             <FaGoogle className="text-5xl text-primary border-[.3px] border-primary bg-white p-2 rounded-full hover:text-white hover:bg-primary hover:-translate-y-2 hover:shadow-2xl hover:drop-shadow-2xl transition duration-300 ease-in-out" />
                         </button>
@@ -98,7 +99,7 @@ const Register = () => {
                         <button type="submit" name="action" value="github">
                             <FaGithub className="text-5xl text-primary border-[.3px] border-primary bg-white p-2 rounded-full hover:text-white hover:bg-primary hover:-translate-y-2 hover:shadow-2xl hover:drop-shadow-2xl transition duration-300 ease-in-out" />
                         </button>
-                    </form>
+                    </form> */}
                 </div>
                 <SideTestimonials />
             </div>

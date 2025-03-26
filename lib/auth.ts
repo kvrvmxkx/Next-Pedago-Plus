@@ -1,42 +1,28 @@
-import NextAuth from "next-auth"
-import {PrismaAdapter} from "@auth/prisma-adapter"
-import { prisma } from './prisma';
-import Github from 'next-auth/providers/github';
-import Google from 'next-auth/providers/google';
-import Credentials from 'next-auth/providers/credentials';
+import { betterAuth, BetterAuthOptions } from "better-auth";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+import { prisma } from "./prisma";
+import { sendEmail } from "@/action/email";
+import { openAPI } from "better-auth/plugins";
 
-import { getUserByEmail } from "@/data/user";
-
-export const { handlers, signIn, signOut, auth } = NextAuth({
-    session: {
-        strategy: 'jwt'
+export const auth = betterAuth({
+    database: prismaAdapter(prisma,{
+        provider: "mysql"
+    }),
+    plugins: [openAPI()], //api/auth/reference
+    emailAndPassword: {
+        enabled: true,
+        requireEmailVerification: true
     },
-    adapter: PrismaAdapter(prisma),
-    providers: [
-        Github, 
-        Google,
-        Credentials({
-            async authorize(credentials) {
-                if (credentials === null) return null;
-                try {
-                    const user = getUserByEmail(credentials?.email)
-                    if(user) {
-                        const isMatch = user?.password === credentials?.password;
-                        if(isMatch) {
-                            return user;
-                        }
-                        else {
-                            throw new Error('Password incorrect');
-                        }
-                    }
-                    else {
-                        throw new Error('User not found');
-                    }
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                } catch (error) {
-                    throw new Error('Server error');
-                }
-            }
-        })
-    ],
-})
+    emailVerification: {
+        sendOnSignUp: true,
+        autoSignInAfterVerification: true,
+        sendVerificationEmail: async ({user, token}) => {
+            const verificationUrl = `${process.env.BETTER_AUTH_URL}/api/auth/verify-email?token=${token}&callbackURL=${process.env.EMAIL_VERIFICATION_CALLBACK_URL}`;
+            await sendEmail({
+                to: user.email,
+                subject: "Verify your email address",
+                verificationUrl: verificationUrl
+            })
+        }
+    }
+} satisfies BetterAuthOptions)

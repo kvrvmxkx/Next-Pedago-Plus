@@ -1,19 +1,19 @@
 import { Home, LayoutGrid, LogIn, Phone } from 'lucide-react'
-import Image from 'next/image'
+//import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 //import { SignOut } from './authButtons'
-import { auth } from '@/lib/auth'
-import { signOutAction } from '@/action'
+//import { auth } from '@/lib/auth'
+//import { signOutAction } from '@/action'
 
 
 const Nav = async() => {
-  const session = await auth();
+  // const session = await auth();
 
-  let initials:string[] = []
-  if (session?.user?.name && !session?.user?.image) {
-      initials = session.user.name.split(' ');
-  }
+  // let initials:string[] = []
+  // if (session?.user?.name && !session?.user?.image) {
+  //     initials = session.user.name.split(' ');
+  // }
 
   return (
     <>
@@ -51,7 +51,7 @@ const Nav = async() => {
           </ul>
         </div>
 
-        {
+        {/*
           session?.user 
           ? 
           <div className='group relative'>
@@ -94,7 +94,7 @@ const Nav = async() => {
                       </button>
                     </form>
                     {/* <SignOut /> */}
-                    {/* <a onClick={() => signOut()} className="block px-4 py-2 hover:bg-gray-100">Sign out</a> */}
+                    {/* <a onClick={() => signOut()} className="block px-4 py-2 hover:bg-gray-100">Sign out</a> }
                   </li>
                 </ul>
             </div>
@@ -110,7 +110,7 @@ const Nav = async() => {
                 </li>
               </ul>
             </div>
-        }
+        */}
 
 
 

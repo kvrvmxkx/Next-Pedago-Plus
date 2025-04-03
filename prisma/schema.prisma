@@ -24,7 +24,7 @@ model User {
 
 model Account {
   id                       String  @id @default(cuid())
-  userId                   String  @unique
+  userId                   String
   accountId                String
   providerId               String
   type                     String?

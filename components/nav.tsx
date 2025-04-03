@@ -3,17 +3,20 @@ import { Home, LayoutGrid, LogIn, Phone } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 //import { SignOut } from './authButtons'
-//import { auth } from '@/lib/auth'
+import Image from 'next/image'
+import SignoutButton from './signOutButton'
+import { Session } from '@/lib/auth'
+
 //import { signOutAction } from '@/action'
 
 
-const Nav = async() => {
-  // const session = await auth();
+const Nav = async({session}:{session:Session | null}) => {
 
-  // let initials:string[] = []
-  // if (session?.user?.name && !session?.user?.image) {
-  //     initials = session.user.name.split(' ');
-  // }
+  let initials:string[] = []
+  if (session?.user?.name && !session?.user?.image) {
+      initials = session.user.name.split(' ');
+  }
+
 
   return (
     <>
@@ -51,7 +54,7 @@ const Nav = async() => {
           </ul>
         </div>
 
-        {/*
+        {
           session?.user 
           ? 
           <div className='group relative'>
@@ -66,7 +69,7 @@ const Nav = async() => {
                 alt="hero"
               /> :
               <div className='h-10 w-10 rounded-full bg-primary text-white flex items-center justify-center font-bold'>
-                <span>{initials[0]}</span>
+                <span>{`${initials[0][0]}${initials[1][0]}`}</span>
               </div>
             }
 
@@ -88,13 +91,13 @@ const Nav = async() => {
                   </li>
                   <hr className='my-2 border-gray-300'/>
                   <li>
-                    <form action={signOutAction}>
+                    {/* <form action={}>
                       <button type="submit" className="px-4 py-2 hover:bg-gray-100 w-full text-start">
                         SignOut
                       </button>
-                    </form>
+                    </form> */}
                     {/* <SignOut /> */}
-                    {/* <a onClick={() => signOut()} className="block px-4 py-2 hover:bg-gray-100">Sign out</a> }
+                    <SignoutButton />
                   </li>
                 </ul>
             </div>
@@ -103,14 +106,14 @@ const Nav = async() => {
             <div className='my-auto'>
               <ul className="flex gap-2">
                 <li>
-                  <a href="/signin" className="cursor-pointer">Sign In</a>
+                  <a href="/sign-in" className="cursor-pointer">Sign In</a>
                 </li>
                 <li>
-                  <a href="/register" className="bg-primary text-white px-5 py-3 mx-1 rounded-md cursor-pointer">Register</a>
+                  <a href="/sign-up" className="bg-primary text-white px-5 py-3 mx-1 rounded-md cursor-pointer">Sign up</a>
                 </li>
               </ul>
             </div>
-        */}
+        }
 
 
 

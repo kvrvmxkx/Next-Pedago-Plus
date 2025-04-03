@@ -1,34 +1,36 @@
 "use client"
 
 import SideTestimonials from "@/components/sideTestimonials";
-import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
+//import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 
 import { SyntheticEvent, useState } from "react";
-import { useRouter } from "next/navigation";
-import { CredentialsSignInAction, socialSignInAction } from "@/action";
+//import { useRouter } from "next/navigation";
+// import { CredentialsSignInAction, socialSignInAction } from "@/action";
 
 const SignIn = () => {
     const [error, setError] = useState("");
-    const router = useRouter();
+    //const router = useRouter();
     async function handleFormSubmit(event: SyntheticEvent<HTMLFormElement, SubmitEvent>) {
         event.preventDefault()
         try {
             const formData = new FormData(event.currentTarget);
+            console.log(formData);
+            
 
-                const email = formData.get('email');
-                const password = formData.get('password');
+                //const email = formData.get('email');
+                //const password = formData.get('password');
 
-                if(email && password) {
-                    const response = await CredentialsSignInAction(formData);
-                    if(!!response.error) {
-                        setError("Server error");
-                    } else {
-                        router.push('/');
-                    }
-                }
-                else {
-                    setError("Please fill all inputs");
-                }
+                // if(email && password) {
+                //     const response = await CredentialsSignInAction(formData);
+                //     if(!!response.error) {
+                //         setError("Server error");
+                //     } else {
+                //         router.push('/');
+                //     }
+                // }
+                // else {
+                //     setError("Please fill all inputs");
+                // }
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
@@ -68,7 +70,7 @@ const SignIn = () => {
                     </form>
 
 
-                    <form action={socialSignInAction} className='flex justify-center gap-1'>
+                    {/* <form action={socialSignInAction} className='flex justify-center gap-1'>
                         <button type="submit" name="action" value="google">
                             <FaGoogle className="text-5xl text-primary border-[.3px] border-primary bg-white p-2 rounded-full hover:text-white hover:bg-primary hover:-translate-y-2 hover:shadow-2xl hover:drop-shadow-2xl transition duration-300 ease-in-out" />
                         </button>
@@ -81,7 +83,7 @@ const SignIn = () => {
                             <FaGithub className="text-5xl text-primary border-[.3px] border-primary bg-white p-2 rounded-full hover:text-white hover:bg-primary hover:-translate-y-2 hover:shadow-2xl hover:drop-shadow-2xl transition duration-300 ease-in-out" />
                         </button>
 
-                    </form>
+                    </form> */}
 
                 </div>
                 <SideTestimonials />

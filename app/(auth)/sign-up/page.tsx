@@ -23,13 +23,14 @@ import { authClient } from "@/lib/auth-client";
 
 import { useState } from "react";
 
+import { toast } from "sonner";
+
 import SideTestimonials from "@/components/sideTestimonials";
 
-import { toast } from "sonner"
-
+import { useRouter } from "next/navigation";
 
 export default function SignUp() {
-
+	const router = useRouter();
 
 	const [pending, setPending] = useState(false);
 
@@ -55,19 +56,13 @@ export default function SignUp() {
 					setPending(true);
 				},
 				onSuccess: () => {
-					toast.success("Account created",{
-						description:"Your account has been created. Check your email for a verification link.",
-						action: {
-							label: "Ok",
-							onClick: () => {},
-						},
-					});
+					toast.success("Your account has been created. Check your email for a verification link.");
+					router.push("/sign-in");
+					router.refresh();
 				},
 				onError: (ctx) => {
 					console.log("error", ctx);
-					toast.error("Something went wrong",{
-						description: ctx.error.message ?? "Something went wrong.",
-					});
+					toast.error(ctx.error.message ?? "Something went wrong.");
 				},
 			}
 		);
@@ -83,39 +78,44 @@ export default function SignUp() {
                         <p className='text-xs'>Please enter your account details</p>
                     </div>
 					<Form {...form}>
-						<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-							{["name", "email", "password", "confirmPassword"].map((field) => (
-								<FormField
-									control={form.control}
-									key={field}
-									name={field as keyof z.infer<typeof signUpSchema>}
-									render={({ field: fieldProps }) => (
-										<FormItem>
-											<FormLabel>
-												{field.charAt(0).toUpperCase() + field.slice(1)}
-											</FormLabel>
-											<FormControl>
-												<Input
-													className='rounded-md focus-visible:ring-0 focus-visible:border-primary px-4 py-6'
-													type={
-														field.toLowerCase().includes("password")
-															? "password"
-															: field === "email"
-															? "email"
-															: "text"
-													}
-													placeholder={`Enter your ${field}`}
-													{...fieldProps}
-													autoComplete="off"
-												/>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-							))}
-							<p className='text-end'>Already have account ? <span className='text-primary'><Link href="/signin">Signin.</Link></span></p>
-							<LoadingButton pending={pending}>Sign up</LoadingButton>
+						<form onSubmit={form.handleSubmit(onSubmit)}>
+							<div className="space-y-3">
+								{["name", "email", "password", "confirmPassword"].map((field) => (
+									<FormField
+										control={form.control}
+										key={field}
+										name={field as keyof z.infer<typeof signUpSchema>}
+										render={({ field: fieldProps }) => (
+											<FormItem>
+												<FormLabel>
+													{field.charAt(0).toUpperCase() + field.slice(1)}
+												</FormLabel>
+												<FormControl>
+													<Input
+														className='rounded-md focus-visible:ring-0 focus-visible:border-primary px-4 py-6'
+														type={
+															field.toLowerCase().includes("password")
+																? "password"
+																: field === "email"
+																? "email"
+																: "text"
+														}
+														placeholder={`Enter your ${field}`}
+														{...fieldProps}
+														autoComplete="off"
+													/>
+												</FormControl>
+												<FormMessage />
+											</FormItem>
+										)}
+									/>
+								))}
+							</div>
+
+							<p className='text-end'>Already have account ? <span className='text-primary'><Link href="/sign-in">Sign in.</Link></span></p>
+							<div className="mt-6">
+								<LoadingButton pending={pending}>Sign up</LoadingButton>
+							</div>
 						</form>
 					</Form>
 				</div>

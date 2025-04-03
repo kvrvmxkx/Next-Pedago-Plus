@@ -37,7 +37,6 @@ CREATE TABLE `account` (
     `refreshTokenExpiresAt` DATETIME(3) NULL,
     `password` TEXT NULL,
 
-    UNIQUE INDEX `account_userId_key`(`userId`),
     INDEX `account_userId_idx`(`userId`),
     UNIQUE INDEX `account_provider_providerId_key`(`provider`, `providerId`),
     PRIMARY KEY (`id`)

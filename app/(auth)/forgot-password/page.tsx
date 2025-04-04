@@ -1,6 +1,6 @@
 'use client'
 
-import SideTestimonials from '@/components/sideTestimonials';
+import SideTestimonials from '@/components/auth/sideTestimonials';
 
 import {
 	Form,
@@ -49,7 +49,7 @@ const ForgotPassword = () => {
 	};
     return (
         <div className='app-container text-gray-500 py-20' id='top'>
-            <div className='flex lg:p-10' >
+            <div className='flex items-center lg:p-10' >
                 <div className='flex flex-col gap-8 w-full md:mx-16 lg:mx-0 lg:p-10'>
                     <div>
                         <p className='font-semibold text-3xl md:text-4xl lg:text-5xl text-black'>Don&apos;t remember your password ?</p>

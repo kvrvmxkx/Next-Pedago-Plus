@@ -1,6 +1,4 @@
 "use client"
-import { FaFacebook } from 'react-icons/fa';
-
 
 import {
 	Form,
@@ -28,10 +26,12 @@ import { toast } from "sonner";
 
 import { useRouter } from "next/navigation";
 
-import SideTestimonials from "@/components/sideTestimonials";
 import { ErrorContext } from "@better-fetch/fetch";
-import GithubSignInButton from '@/components/socialSignInButton/github';
-import GoogleSignInButton from '@/components/socialSignInButton/google';
+
+import SignSocialButton from '@/components/auth/signSocialButton';
+import SideTestimonials from "@/components/auth/sideTestimonials";
+
+
 
 const SignIn = () => {
 
@@ -79,7 +79,7 @@ const SignIn = () => {
 
     return (
         <div className='app-container text-gray-500 py-20' id='top'>
-            <div className='flex lg:p-10' >
+            <div className='flex items-center lg:p-10' >
                 <div className='flex flex-col gap-8 w-full md:mx-16 lg:mx-0 lg:p-10'>
                     <div>
                         <p className='font-semibold text-3xl md:text-4xl lg:text-5xl text-black'>Welcome back</p>
@@ -124,12 +124,18 @@ const SignIn = () => {
 							</div>
 						</form>
 					</Form>
-					<div className='flex justify-center gap-1'>
-						<GoogleSignInButton />
-						<FaFacebook className="text-5xl text-primary border-[.3px] border-primary bg-white p-2 rounded-full hover:text-white hover:bg-primary hover:-translate-y-2 hover:shadow-2xl hover:drop-shadow-2xl transition duration-300 ease-in-out" />
-                        <GithubSignInButton />
-						</div>
+					{
+					/** 
+					 *! Social Sign button
+					 */
+					 }
+					<SignSocialButton />
                 </div>
+				{
+				/** 
+				 *! Side Testimonials
+				*/
+				}
                 <SideTestimonials />
             </div>
         </div>

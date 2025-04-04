@@ -1,5 +1,6 @@
 "use server";
 
+import EmailChanging from "@/emails/emailChanging";
 import EmailVerification from "@/emails/emailVerification";
 import ResetPassword from "@/emails/resetPassword";
 import { Resend } from "resend";
@@ -11,7 +12,7 @@ export async function sendEmail({
 }: {
     to:string,
     url:string,
-    type: "EmailVerification" | "ResetPassword"
+    type: "EmailVerification" | "ResetPassword" | "EmailChanging"
 }) {
 
     const pattern = 
@@ -33,6 +34,10 @@ export async function sendEmail({
             case "ResetPassword":
                 subject = "Reset your password";
                 template = ResetPassword({url})
+                break;
+            case "EmailChanging":
+                subject = "Confirm email changing";
+                template = EmailChanging({url})
                 break;
             default:
                 subject = "Ika Services";

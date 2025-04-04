@@ -2,12 +2,40 @@ import { betterAuth, BetterAuthOptions } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 import { sendEmail } from "@/action/email";
-import { openAPI } from "better-auth/plugins";
+import { openAPI, admin } from "better-auth/plugins";
 
 export const auth = betterAuth({
     database: prismaAdapter(prisma,{
         provider: "mysql"
     }),
+    session: {
+        expiresIn: 60  * 60 * 24 * 7, // 7 days
+        // BUG: Prob a bug with updateAge method. It throws an error - Argument `where` of type SessionWhereUniqueInput needs at least one of `id` arguments. 
+        // As a workaround, set updateAge to a large value for now.
+        updateAge: 60 * 60 * 24 * 7, // 7 days (every 7 days the session expiration is updated)
+        cookieCache: {
+            enabled: true,
+            maxAge: 5 * 60 // Cache duration in seconds
+        }
+    },
+    user: {
+        additionalFields: {
+            subscription: {
+                type: "string",
+                required: false,
+            },
+        },
+        changeEmail: {
+            enabled: true,
+            sendChangeEmailVerification: async ({ newEmail, url }) => {
+                await sendEmail({
+                    type: "EmailChanging",
+                    to: newEmail,
+                    url: url
+                })
+            }
+        }
+    },
     socialProviders: {
         github: {
             clientId: process.env.GITHUB_ID as string,
@@ -18,7 +46,7 @@ export const auth = betterAuth({
             clientSecret: process.env.GOOGLE_SECRET as string
         }
     },
-    plugins: [openAPI()], //api/auth/reference
+    plugins: [openAPI(), admin()], //api/auth/reference
     emailAndPassword: {
         enabled: true,
         requireEmailVerification: true,

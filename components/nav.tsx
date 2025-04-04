@@ -1,13 +1,10 @@
 import { Home, LayoutGrid, LogIn, Phone } from 'lucide-react'
-//import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-//import { SignOut } from './authButtons'
 import Image from 'next/image'
-import SignoutButton from './signOutButton'
-import { Session } from '@/lib/auth'
 
-//import { signOutAction } from '@/action'
+import { Session } from '@/lib/auth'
+import SignoutButton from './auth/signOutButton'
 
 
 const Nav = async({session}:{session:Session | null}) => {
@@ -91,12 +88,6 @@ const Nav = async({session}:{session:Session | null}) => {
                   </li>
                   <hr className='my-2 border-gray-300'/>
                   <li>
-                    {/* <form action={}>
-                      <button type="submit" className="px-4 py-2 hover:bg-gray-100 w-full text-start">
-                        SignOut
-                      </button>
-                    </form> */}
-                    {/* <SignOut /> */}
                     <SignoutButton />
                   </li>
                 </ul>

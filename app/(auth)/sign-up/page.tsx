@@ -25,9 +25,10 @@ import { useState } from "react";
 
 import { toast } from "sonner";
 
-import SideTestimonials from "@/components/sideTestimonials";
+import SideTestimonials from "@/components/auth/sideTestimonials";
 
 import { useRouter } from "next/navigation";
+import SignSocialButton from "@/components/auth/signSocialButton";
 
 export default function SignUp() {
 	const router = useRouter();
@@ -71,7 +72,7 @@ export default function SignUp() {
 
 	return (
 		<div className="app-container text-gray-500 py-20" id='top'>
-			<div className='flex lg:p-10' >
+			<div className='flex items-center lg:p-10' >
 				<div className="flex flex-col gap-8 w-full md:mx-16 lg:mx-0 lg:px-10 my-auto">
 					<div>
                         <p className='font-semibold text-3xl md:text-4xl lg:text-5xl text-black'>Welcome</p>
@@ -118,7 +119,18 @@ export default function SignUp() {
 							</div>
 						</form>
 					</Form>
+					{
+					/** 
+					 *! Social Sign button
+					 */
+					 }
+					<SignSocialButton />
 				</div>
+				{
+				/** 
+				 *! Side Testimonials
+				*/
+				}
 				<SideTestimonials />
 			</div>
 		</div>

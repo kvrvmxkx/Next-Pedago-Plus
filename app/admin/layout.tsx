@@ -1,4 +1,4 @@
-import { LayoutGrid, LogOut, Settings, Users } from 'lucide-react';
+import { GraduationCap, LayoutGrid, LogOut, Settings, Users } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -6,6 +6,8 @@ import { auth } from '@/lib/auth';
 import { headers } from "next/headers";
 import SignoutButton from '@/components/auth/signOutButton';
 import Image from 'next/image';
+//import { sendEmail } from '@/action/sgEmail';
+
 
 const layout = async ({
   children,
@@ -15,43 +17,49 @@ const layout = async ({
 
   const session = await auth.api.getSession({
     headers: await headers()
-  })
-
-  console.log(session);
-  
+  })  
 
   let initials:string[] = []
   initials = session!.user.name.split(' ');
+
+  //sendEmail({to:"karacoulibaly@gmail.com",url:"localhost:3000", type:"EmailVerification"});
+
 
   return (
     <div className='bg-white h-screen w-screen'>
         <div className='app-container h-screen py-8'>
             <div className='flex gap-2 h-full'>
                 <div className='w-56 border border-gray-300 rounded-xl flex flex-col justify-between gap-5 py-5 '>
-                    <div className='flex flex-col gap-5'>
-                        <p className='ml-[42px] font-extrabold text-lg'>
+                    <div className='flex flex-col gap-2'>
+                        <p className='ml-[42px] font-extrabold text-lg mb-5'>
                             <span className='text-primary'>Pedago</span>
                             <span className=''>+</span>
                         </p>
-                        <Link className='border-l-2 pr-3 border-white hover:border-primary hover:text-primary flex items-center font-semibold text-sm' href="">
+                        <Link className='border-l-2 pr-3 border-white hover:border-primary hover:text-primary py-2 hover:bg-indigo-50 flex items-center font-semibold text-sm' 
+                        href="">
                         <LayoutGrid size={16} className='mx-3'/>
                         Dashboard
                         </Link>
-                        <Link className='border-l-2 pr-3 border-white hover:border-primary hover:text-primary flex items-center font-semibold text-sm' href="">
+                        <Link className='border-l-2 pr-3 border-white hover:border-primary hover:text-primary py-2 hover:bg-indigo-50 flex items-center font-semibold text-sm' 
+                        href="">
                         <Users size={16} className='mx-3'/>
                         Users</Link>
-                        <Link className='border-l-2 pr-3 border-white hover:border-primary hover:text-primary flex items-center font-semibold text-sm' href="">
+                        <Link className='border-l-2 pr-3 border-white hover:border-primary hover:text-primary py-2 hover:bg-indigo-50 flex items-center font-semibold text-sm' 
+                        href="/admin/courses">
+                        <GraduationCap size={16} className='mx-3'/>
+                        Courses</Link>
+                        <Link className='border-l-2 pr-3 border-white hover:border-primary hover:text-primary py-2 hover:bg-indigo-50 flex items-center font-semibold text-sm' href="">
                         <Settings size={16} className='mx-3'/>
                         Settings</Link>
                     </div>
 
                     <div>
-                        <Link className='border-l-2 pr-3 border-white hover:border-primary hover:text-primary flex items-center font-semibold text-sm' href="">
+                        <Link className='border-l-2 pr-3 border-white hover:border-indigo-50 hover:text-primary py-2 hover:bg-indigo-50 flex items-center font-semibold text-sm' href="">
                         <LogOut size={16} className='mx-3'/>
                         Sign Out</Link>
                     </div>
                 </div>
-                <div className='grow'>
+                <div className='grow overflow-auto flex flex-col'>
                     <div className='border flex items-center justify-end border-gray-300 w-full rounded-xl p-2'>
                       <p className='mr-2'>
                         <span className='text-gray-500'>Hey, </span> 
@@ -94,7 +102,9 @@ const layout = async ({
                         </div>
                       </div>
                     </div>
-                    {children}
+                    <div className='grow'>
+                      {children}
+                    </div>
                 </div>
             </div>
         </div>

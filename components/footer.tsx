@@ -1,4 +1,5 @@
 import { MoveUp } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 const Footer = () => {
@@ -7,26 +8,26 @@ const Footer = () => {
             <div className='bg-secondary '>
                 <div className='app-container py-10'>
                     <div className='flex flex-col justify-center items-center gap-10'>
-                        <a href='/' className='text-2xl font-extrabold'>
+                        <Link href='/' className='text-2xl font-extrabold'>
                             <span className='text-primary'>Pedago</span>
                             <span className=''>+</span>
-                        </a>
+                        </Link>
 
                         <ul className="flex gap-4 md:gap-8">
                             <li>
-                                <a href="/" className="" aria-current="page">Home</a>
+                                <Link href="/" className="" aria-current="page">Home</Link>
                             </li>
                             <li>
-                                <a href="#" className="">Course</a>
+                                <Link href="#" className="">Course</Link>
                             </li>
                             <li>
-                                <a href="/#pricing" className="">Pricing</a>
+                                <Link href="/#pricing" className="">Pricing</Link>
                             </li>
                             <li>
-                                <a href="/about-us" className="">About</a>
+                                <Link href="/about-us" className="">About</Link>
                             </li>
                             <li>
-                                <a href="/contact" className="">Contact</a>
+                                <Link href="/contact" className="">Contact</Link>
                             </li>
                         </ul>
 
@@ -39,9 +40,9 @@ const Footer = () => {
                 <div className='app-container'>
                     <div className='flex justify-between items-center'>
                         <p className='text-gray-500'>Copyright Pedago+, All right reserved. </p>
-                        <a href='#top' className='bg-primary p-3 rounded-sm text-white'>
+                        <Link href='#top' className='bg-primary p-3 rounded-sm text-white'>
                             <MoveUp size={15} />
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

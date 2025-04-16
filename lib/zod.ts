@@ -16,6 +16,12 @@ const getPasswordSchema = (type: "password" | "confirmPassword") =>
         .max(32, `${type} can not exceed 32 characters`);
 
 
+const getStringSchema = (type: "Title" | "Category" | "Description" | "Price") =>
+    string({ required_error: `${type} is required` })
+        .min(3, `${type} is required`)
+        .max(32, `${type} must be less than 50 characters`);
+
+
 export const signUpSchema = object({
     name: getNameSchema(),
     email: getEmailSchema(),
@@ -45,3 +51,12 @@ export const resetPasswordSchema = object({
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
+
+
+export const informationsSchema = object({
+  title: getStringSchema("Title"),
+  category:  getStringSchema("Category"),
+  description: getStringSchema("Description"),
+  price: getStringSchema("Price"),
+
+});

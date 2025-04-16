@@ -16,7 +16,7 @@ export default async function authMiddleware(request: NextRequest) {
   //trigger pathname access
   const headers = new Headers(request.headers);
   headers.set("x-current-path", pathName);
-
+  
 
   const { data: session } = await betterFetch<Session>(
     "/api/auth/get-session",
@@ -31,17 +31,17 @@ export default async function authMiddleware(request: NextRequest) {
 
   if (!session) {
     if (isAuthRoute || isPasswordRoute) {
-      return NextResponse.next();
+      return NextResponse.next({ headers });
     }
-    return NextResponse.redirect(new URL("/sign-in", request.url));
+    return NextResponse.redirect(new URL("/sign-in", request.url), { headers });
   }
 
   if (isAuthRoute || isPasswordRoute) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/", request.url), { headers });
   }
 
   if (isAdminRoute && session.user.role !== "admin") {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/", request.url), { headers });
   }
 
   return NextResponse.next({ headers });

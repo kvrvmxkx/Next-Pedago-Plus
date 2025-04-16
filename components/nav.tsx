@@ -1,3 +1,5 @@
+"use client";
+
 import { Home, LayoutGrid, LogIn, Phone } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
@@ -5,15 +7,19 @@ import Image from 'next/image'
 
 import { Session } from '@/lib/auth'
 import SignoutButton from './auth/signOutButton'
+import { usePathname } from 'next/navigation';
 
 
-const Nav = async({session}:{session:Session | null}) => {
+const Nav = ({session}:{session:Session | null}) => {
 
   let initials:string[] = []
   if (session?.user?.name && !session?.user?.image) {
       initials = session.user.name.split(' ');
   }
 
+  const pathname = usePathname();
+  console.log(pathname);
+  
 
   return (
     <>

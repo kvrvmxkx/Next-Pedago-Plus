@@ -2,7 +2,14 @@ import { CircleDollarSign, Star, UserRound } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 
-const CoursesDisplay = ({ title, data }) => {
+const CoursesDisplay = ({ title, data }: {title: string, data: {
+    title: string,
+    image: string,
+    tag: string,
+    students: number,
+    rates: number,
+    price: number }[]
+    }) => {
     return (
         <div className="app-container mt-10">
             <div className="flex flex-col">

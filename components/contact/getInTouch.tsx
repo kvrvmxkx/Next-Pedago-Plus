@@ -28,7 +28,7 @@ const GetInTouch = () => {
         <div className='py-20 mx-auto'>
             <div className='app-container'>
                 <p className='text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-center '>Get in touch</p>
-                <p className='text-gray-500 text-center mx-auto mt-1 mb-7'>Ready to build your education faster ? Let's chat about how we can help</p>
+                <p className='text-gray-500 text-center mx-auto mt-1 mb-7'>Ready to build your education faster ? Let&apos;s chat about how we can help</p>
                 <div className='grid md:grid-cols-3 gap-4'>
                     {
                         data.map((e, k) => <div key={k} className='flex flex-col gap-2 items-start bg-gray-100 p-3 rounded-lg text-gray-600 text-sm transition duration-300 ease-in-out hover:scale-105'>

@@ -205,7 +205,7 @@ const Chat = () => {
                   {/* <pre className="whitespace-pre-wrap mt-4">{output}</pre> */}
                   <div ref={endRef}/>
                 </div>
-                <ChatInput onSend={handleGenerate} />
+                <ChatInput handleSubmit={handleGenerate} />
               </div>
           </div>
         </div>

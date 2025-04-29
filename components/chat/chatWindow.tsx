@@ -2,7 +2,6 @@
 
 import { UIMessage } from 'ai';
 import React, { useEffect, useRef } from 'react'
-import { Avatar } from '../ui/avatar';
 
 const ChatWindow = ({messages}: {messages: UIMessage[]}) => {
 
@@ -23,26 +22,8 @@ const ChatWindow = ({messages}: {messages: UIMessage[]}) => {
             ) : (
             messages.map((message) => (
                 <div key={message.id} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-                    <div className="flex items-start gap-2 max-w-[80%]">
-                        {message.role !== "user" && (
-                        <Avatar className="h-8 w-8 bg-primary text-primary-foreground">
-                            <span className="text-xs">AI</span>
-                        </Avatar>
-                        )}
-
-                        <div
-                        className={`rounded-lg px-4 py-2 ${
-                            message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"
-                        }`}
-                        >
+                    <div className={`rounded-lg px-4 py-2 ${message.role === "user" ? "bg-muted" : "bg-transparent"}`}>
                         <div className="whitespace-pre-wrap">{message.content}</div>
-                        </div>
-
-                        {message.role === "user" && (
-                        <Avatar className="h-8 w-8 bg-secondary text-secondary-foreground">
-                            <span className="text-xs">You</span>
-                        </Avatar>
-                        )}
                     </div>
                 </div>
             ))

@@ -1,7 +1,7 @@
 "use client"
 
 import { Button, buttonVariants } from '@/components/ui/button'
-import { Ellipsis, PanelRightClose, PanelRightOpen, Pencil, SquarePen, Trash2 } from 'lucide-react'
+import { Ellipsis, PanelRightClose, PanelRightOpen, Pencil, Send, SquarePen, Trash2, X } from 'lucide-react'
 import React, { useState } from 'react';
 
 import {
@@ -12,17 +12,24 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { cn } from '@/lib/utils'
 
-import ChatInput from '@/components/chat/chatInput'
 import ChatWindow from '@/components/chat/chatWindow'
 
 import { useChat } from "@ai-sdk/react"
+import { Input } from '@/components/ui/input';
 
 
 
 const Chat = () => {
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+  const { messages, input, setInput, handleInputChange, handleSubmit, isLoading } = useChat({
     api: "/api/chat",
   })
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+        handleSubmit();
+        setInput("");
+    }
+  };
 
 
   const [sidebarState, setSidebarState] = useState(false);
@@ -101,7 +108,26 @@ const Chat = () => {
           <div className='grow flex justify-center'>
               <div className='md:w-[80%] flex flex-col justify-between gap-2'>
                 <ChatWindow messages={messages} />
-                <ChatInput handleSubmit={handleSubmit} handleInputChange={handleInputChange} isLoading={isLoading} input={input} />
+                <div className="flex flex-col items-center border rounded-lg">
+                  <Input
+                      className="w-full border-none shadow-none px-3 py-2 focus:outline-none focus-visible:ring-0 resize-none max-h-40"
+                      placeholder="Ask anything..."
+                      value={input}
+                      onChange={handleInputChange}
+                      onKeyDown={handleKeyPress}
+                  />
+                  <div className="p-1 w-full flex justify-end gap-1">
+                      {input && (
+                          <Button onClick={() => setInput("")} variant="outline" className='rounded-full' size="icon">
+                              <X />
+                          </Button>
+                      )}
+                      <Button onClick={handleSubmit} variant="outline" className='rounded-full' size="icon" disabled={isLoading}>
+                          <Send />
+                      </Button>
+                  </div>
+              </div>
+
               </div>
           </div>
         </div>

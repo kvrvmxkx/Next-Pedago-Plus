@@ -93,43 +93,6 @@ const Testimonials = () => {
 
             {
                 /**
-                *  ? Horizontal scroll  
-                */
-            }
-            {/* <div class="overflow-auto mr-2">
-          <div className="flex gap-6 my-16 px-4 md:px-14 lg:px-24 xl:px-40 mx-auto">
-            {
-              feeds.map((i, k) => <div key={k} className="flex flex-col bg-white p-5 gap-3 rounded-2xl group hover:bg-primary hover:text-white min-w-[320px]">
-                <p className="font-bold ">{i.title}</p>
-                <div className="flex items-start justify-center gap-4">
-                  <div className="border p-2 bg-primary group-hover:bg-white rounded-full text-white group-hover:text-primary">
-                    <Quote size={10} />
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    <div className="h-48 overflow-auto">
-                      <p className="text-gray-500 group-hover:text-white">{i.comment}</p>
-                    </div>
-
-                    <hr className="border-slate-400" />
-
-                    <div className="flex items-center gap-3">
-                      <div className="bg-slate-500 rounded-full h-14 w-14 flex items-center">
-                        <span className="mx-auto my-auto text-white">{i.firstname.at(0) + i.lastname.at(0)}</span>
-                      </div>
-                      <div className="flex flex-col">
-                        <p className="font-bold">{`${i.firstname} ${i.lastname}`}</p>
-                        <Rating style={{ maxWidth: 90 }} value={i.rate} readOnly />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>)
-            }
-          </div>
-        </div> */}
-
-            {
-                /**
                 *  ? Infinite scroll  
                 */
             }
@@ -151,7 +114,7 @@ const Testimonials = () => {
 
                                     <div className="flex items-center gap-3">
                                         <div className={`bg-${color[Math.floor(Math.random() * color.length)]}-500 rounded-full h-14 w-14 flex items-center`}>
-                                            <span className="mx-auto my-auto text-white">{i.firstname.at(0) + i.lastname.at(0)}</span>
+                                            <span className="mx-auto my-auto text-white">{`${i.firstname?.at(0)} + ${i.lastname?.at(0)}`}</span>
                                         </div>
                                         <div className="flex flex-col">
                                             <p className="font-bold">{`${i.firstname} ${i.lastname}`}</p>

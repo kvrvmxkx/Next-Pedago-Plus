@@ -31,17 +31,17 @@ const layout = async ({
             <div className='flex gap-2 h-full'>
                 <div className='w-56 border border-gray-300 rounded-xl flex flex-col justify-between gap-5 py-5 '>
                     <div className='flex flex-col gap-2'>
-                        <p className='ml-[42px] font-extrabold text-lg mb-5'>
+                        <Link href="/" className='ml-[42px] font-extrabold text-lg mb-5'>
                             <span className='text-primary'>Pedago</span>
                             <span className=''>+</span>
-                        </p>
+                        </Link>
                         <Link className='border-l-2 pr-3 border-white hover:border-primary hover:text-primary py-2 hover:bg-indigo-50 flex items-center font-semibold text-sm' 
-                        href="">
+                        href="/admin">
                         <LayoutGrid size={16} className='mx-3'/>
                         Dashboard
                         </Link>
                         <Link className='border-l-2 pr-3 border-white hover:border-primary hover:text-primary py-2 hover:bg-indigo-50 flex items-center font-semibold text-sm' 
-                        href="">
+                        href="/admin/users">
                         <Users size={16} className='mx-3'/>
                         Users</Link>
                         <Link className='border-l-2 pr-3 border-white hover:border-primary hover:text-primary py-2 hover:bg-indigo-50 flex items-center font-semibold text-sm' 

@@ -25,6 +25,7 @@ export const metadata: Metadata = {
 };
 
 const adminRoutes = "/admin";
+const chatRoutes = "/chat";
 
 export default async function RootLayout({
   children,
@@ -41,13 +42,14 @@ export default async function RootLayout({
   const pathName = headerList.get("x-current-path");
 
   const isAdminRoute = pathName ? pathName.includes(adminRoutes) : false;
+  const isChatRoute = pathName ? pathName.includes(chatRoutes) : false;
 
   return (
     <html lang="en">
       <body className={`flex flex-col justify-between bg-app-background min-h-screen font-[family-name:var(--font-geist-sans)] antialiased ${geistSans.variable} ${geistMono.variable}`}>
-        {!isAdminRoute && <Nav session={session} />}  
+        {!isAdminRoute || !isChatRoute && <Nav session={session} />}  
           {children}
-        {!isAdminRoute && <Footer />}  
+        {!isAdminRoute || !isChatRoute && <Footer />}  
         <Toaster richColors closeButton />
       </body>
     </html>

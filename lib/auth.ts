@@ -1,12 +1,12 @@
 import { betterAuth, BetterAuthOptions } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { prisma } from "./prisma";
 import { sendEmail } from "@/action/reEmail";
 import { openAPI, admin } from "better-auth/plugins";
+import prisma from "./prisma";
 
 export const auth = betterAuth({
     database: prismaAdapter(prisma,{
-        provider: "mysql"
+        provider: "mongodb"
     }),
     session: {
         expiresIn: 60  * 60 * 24 * 7, // 7 days
@@ -61,7 +61,7 @@ export const auth = betterAuth({
     emailVerification: {
         sendOnSignUp: true,
         autoSignInAfterVerification: true,
-        sendVerificationEmail: async ({user, token}) => {
+        sendVerificationEmail: async ({user, /*url,*/ token}) => {
             const url = `${process.env.BETTER_AUTH_URL}/api/auth/verify-email?token=${token}&callbackURL=${process.env.EMAIL_VERIFICATION_CALLBACK_URL}`;
             await sendEmail({
                 type: "EmailVerification",

@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/authClient";
 
 import { useState } from "react";
 
@@ -74,8 +74,6 @@ const SignIn = () => {
 		setPendingCredentials(false);
 	};
 
-
-	
 
     return (
         <div className='app-container text-gray-500 py-20' id='top'>

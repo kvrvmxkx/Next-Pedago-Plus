@@ -134,7 +134,7 @@ const Structure = forwardRef<HTMLDivElement>(
           {element.section.session.map((session, sessionKey) => <div key={sessionKey} className='bg-white border border-gray-300 mb-3 rounded-md'>
             <Accordion type="single" collapsible>
               <AccordionItem value={`item-${sessionKey}`}>
-                <AccordionTrigger className='p-2 hover:no-underline group [&[data-current=true]>svg]:hidden' data-current={`${sectionKey}-${sessionKey}` === sessionAriaCurrent} aria-current={`${sectionKey}-${sessionKey}` === sessionAriaCurrent}>
+                <AccordionTrigger className='p-2 hover:no-underline group [&[data-current=true]>svg]:hidden' data-current={`${sectionKey}-${sessionKey}` === sessionAriaCurrent}>
                   <div className='flex items-center gap-2 w-full'>
                     <p className='text-nowrap'>{`Session ${sessionKey+1}: ${session.name}`}</p>
                     <div className={`w-full gap-1 aria-[current="false"]:hidden flex`} aria-current={`${sectionKey}-${sessionKey}` === sessionAriaCurrent}>
@@ -144,8 +144,8 @@ const Structure = forwardRef<HTMLDivElement>(
                         Cancel
                       </div>
                     </div>
-                    <div className='relative'>
-                      <div className='items-center inset-0 absolute group-hover:aria-[current="false"]:flex hidden' aria-current={`${sectionKey}-${sessionKey}` === sessionAriaCurrent}>
+                    <div className='relative group-hover:aria-[current="false"]:flex hidden w-20' aria-current={`${sectionKey}-${sessionKey}` === sessionAriaCurrent}>
+                      <div className='items-center flex inset-0 absolute'>
                         <div className='hover:bg-gray-200 p-1 rounded-md' onClick={() => {setSessionAriaCurrent(`${sectionKey}-${sessionKey}`); setSessionEditionName(session.name)}}>
                           <Pencil size={15}/>
                         </div>
@@ -154,10 +154,9 @@ const Structure = forwardRef<HTMLDivElement>(
                         </div>
                       </div>
                     </div>
-                    
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className='hidden'>
+                <AccordionContent className={`${sectionKey}-${sessionKey}` === sessionAriaCurrent ? "hidden":""} aria-current={`${sectionKey}-${sessionKey}` === sessionAriaCurrent}>
                   <hr className='border-gray-300' />
                   <div className='px-4 mb-4'>
                     <p className='text-xs mt-1 mb-5'>

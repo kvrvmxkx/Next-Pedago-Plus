@@ -1,14 +1,14 @@
-datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
 model User {
-  id            String  @id @default(cuid())
+  id            String  @id @default(cuid()) @map("_id")
   name          String
   email         String  @unique
   emailVerified Boolean @default(false)
@@ -19,78 +19,69 @@ model User {
   banReason     String?
   banExpires    Int? /// Unix timestamp for ban expiration
 
-  accounts Account[]
-  sessions Session[]
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("user")
+  accounts Account[]
+  sessions Session[]
+  courses  Course[]
 }
 
 model Account {
-  id                       String  @id @default(cuid())
+  id                       String  @id @default(cuid()) @map("_id")
   userId                   String
   accountId                String
   providerId               String
   type                     String?
   provider                 String?
-  refresh_token            String? @db.Text
-  access_token             String? @db.Text
+  refresh_token            String?
+  access_token             String?
   expires_at               Int?
   token_type               String?
   scope                    String?
-  id_token                 String? @db.Text
+  id_token                 String?
   session_state            String?
   refresh_token_expires_in Int?
-  user                     User?   @relation(fields: [userId], references: [id])
+
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  password              String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  accessToken           String?   @db.Text
-  refreshToken          String?   @db.Text
-  idToken               String?   @db.Text
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  password              String?   @db.Text
-
-  @@unique([provider, providerId])
-  @@index([userId])
-  @@map("account")
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Session {
-  id             String   @id @default(cuid())
+  id             String   @id @default(cuid()) @map("_id")
   userId         String
   token          String
   expiresAt      DateTime
   ipAddress      String?
   userAgent      String?
   impersonatedBy String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  user           User     @relation(fields: [userId], references: [id])
 
-  @@index([userId])
-  @@map("session")
-}
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-model VerificationToken {
-  identifier String
-  token      String
-  expires    DateTime
-
-  @@unique([identifier, token])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Verification {
-  id         String    @id
-  identifier String    @db.Text
-  value      String    @db.Text
+  id         String    @id @default(cuid()) @map("_id")
+  identifier String
+  value      String
   expiresAt  DateTime
-  createdAt  DateTime?
-  updatedAt  DateTime?
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @updatedAt
+}
 
-  @@map("verification")
+model Course {
+  id     String @id @default(cuid()) @map("_id")
+  userId String
+  author User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

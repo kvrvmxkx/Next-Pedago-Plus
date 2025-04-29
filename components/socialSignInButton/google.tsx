@@ -3,7 +3,7 @@ import { FaGoogle } from 'react-icons/fa'
 
 
 import { useRouter } from "next/navigation";
-import { authClient } from '@/lib/auth-client';
+import { authClient } from '@/lib/authClient';
 
 import { ErrorContext } from "@better-fetch/fetch";
 import { toast } from "sonner";
